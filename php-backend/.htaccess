@@ -1,0 +1,21 @@
+# Apache hardening for the PHP API folder.
+
+# Never serve config or library files directly.
+<FilesMatch "^(config\.php)$">
+  Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Block direct access to /lib/*
+  RewriteRule ^lib/ - [F,L]
+</IfModule>
+
+# No directory listings
+Options -Indexes
+
+# Don't advertise PHP version
+<IfModule mod_headers.c>
+  Header unset X-Powered-By
+  Header always set X-Content-Type-Options "nosniff"
+</IfModule>
