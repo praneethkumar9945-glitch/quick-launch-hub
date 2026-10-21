@@ -6,10 +6,19 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+// STATIC_BUILD=1 produces plain HTML files for shared hosting (GoDaddy/cPanel).
+const isStatic = process.env.STATIC_BUILD === "1";
+
 export default defineConfig({
+  ...(isStatic ? { nitro: false as const } : {}),
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    ...(isStatic
+      ? {
+          spa: { enabled: true },
+        }
+      : {}),
   },
 });
