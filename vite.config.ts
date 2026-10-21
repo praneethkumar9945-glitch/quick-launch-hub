@@ -18,7 +18,6 @@ export default defineConfig({
     ...(isStatic
       ? {
           spa: { enabled: true },
-          prerender: { enabled: true, crawlLinks: true, failOnError: false },
         }
       : {}),
   },

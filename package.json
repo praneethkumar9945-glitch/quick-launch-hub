@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "build:godaddy": "bash scripts/build-godaddy.sh",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
