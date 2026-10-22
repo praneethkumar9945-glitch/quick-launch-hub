@@ -1,0 +1,27 @@
+create type public.app_role as enum ('admin', 'user');
+create table public.user_roles (id uuid primary key default gen_random_uuid(), user_id uuid not null references auth.users(id) on delete cascade, role public.app_role not null, unique(user_id,role));
+grant select on public.user_roles to authenticated;
+grant all on public.user_roles to service_role;
+alter table public.user_roles enable row level security;
+create policy own_roles on public.user_roles for select to authenticated using(user_id=auth.uid());
+create function public.has_role(_user_id uuid, _role public.app_role) returns boolean language sql stable security definer set search_path=public as $$ select exists(select 1 from public.user_roles where user_id=_user_id and role=_role) $$;
+revoke all on function public.has_role(uuid,public.app_role) from public,anon;
+grant execute on function public.has_role(uuid,public.app_role) to authenticated,service_role;
+create table public.website_submissions (id bigint generated always as identity primary key, kind text not null, form_type text not null, name text not null, email text not null default '', phone text not null default '', program text not null default '', payload jsonb not null default '{}', created_at timestamptz not null default now());
+grant insert on public.website_submissions to anon,authenticated;
+grant select,delete on public.website_submissions to authenticated;
+grant all on public.website_submissions to service_role;
+grant usage,select on sequence public.website_submissions_id_seq to anon,authenticated,service_role;
+alter table public.website_submissions enable row level security;
+create policy submit_forms on public.website_submissions for insert to anon,authenticated with check(kind in ('application','score'));
+create policy admin_read on public.website_submissions for select to authenticated using(public.has_role(auth.uid(),'admin'));
+create policy admin_delete on public.website_submissions for delete to authenticated using(public.has_role(auth.uid(),'admin'));
+create index website_submissions_created on public.website_submissions(created_at desc);
+create function public.validate_website_submission() returns trigger language plpgsql set search_path=public as $$ begin
+if length(trim(new.name))<1 or length(new.name)>100 or length(new.email)>255 or length(new.phone)>40 or length(new.program)>250 or length(new.form_type)>100 or length(new.payload::text)>20000 then raise exception 'Invalid submission'; end if;
+if new.kind='score' and (jsonb_typeof(new.payload->'score') is distinct from 'number' or (new.payload->>'score')::numeric not between 0 and 100 or new.payload->>'profile' not in ('ai-innovator','creative-visionary','business-leader','tech-builder','data-strategist')) then raise exception 'Invalid score'; end if;
+new.created_at:=now(); return new; end $$;
+create trigger validate_website_submission before insert on public.website_submissions for each row execute function public.validate_website_submission();
+create function public.public_future_leaderboard(row_limit integer default 10) returns table(id bigint,name text,college text,score integer,profile text,created_at timestamptz) language sql stable security definer set search_path=public as $$ select s.id,s.name,s.payload->>'college',(s.payload->>'score')::integer,s.payload->>'profile',s.created_at from public.website_submissions s where s.kind='score' order by (s.payload->>'score')::integer desc,s.id asc limit least(greatest(row_limit,1),100) $$;
+revoke all on function public.public_future_leaderboard(integer) from public;
+grant execute on function public.public_future_leaderboard(integer) to anon,authenticated,service_role;
