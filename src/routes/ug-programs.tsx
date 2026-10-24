@@ -427,10 +427,14 @@ export function ApplyModal({ program, onClose, variant = "default" }: { program:
         : { why: form.why },
     });
     setSending(false);
-    if (res.ok || res.offline) {
+    if (res.ok) {
       setDone(true);
     } else {
-      setSendError(res.error ?? "Could not submit. Please try again.");
+      setSendError(
+        res.offline
+          ? "Our server is not reachable right now — your application was NOT saved. Please try again in a few minutes."
+          : (res.error ?? "Could not submit. Please try again."),
+      );
     }
   };
 
