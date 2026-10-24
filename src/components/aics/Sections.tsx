@@ -3,6 +3,7 @@ import { useEffect, useState, type ReactNode, type FormEvent } from "react";
 import { Menu, X, Mic, Users, Cpu, Wrench, Network, Compass, Plus, ArrowLeft } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { summit, tracks, agenda, speakerTypes, faqs } from "@/config/aics-summit";
+import { submitApplication } from "@/lib/php-api";
 import stageAssetUrl from "@/assets/aics/g-stage.jpg";
 const stageAsset = { url: stageAssetUrl };
 import studentsAssetUrl from "@/assets/aics/g-students.jpg";
@@ -324,19 +325,46 @@ export function Gallery() {
 const field = "w-full rounded-xl border border-border bg-background/60 px-4 py-3 outline-none transition focus:border-primary-glow";
 
 export function Register() {
-  const [state, setState] = useState<"idle" | "error">("idle");
+  const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [errs, setErrs] = useState<string[]>([]);
-  const submit = (e: FormEvent<HTMLFormElement>) => {
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const d = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const d = new FormData(form);
     const er: string[] = [];
     if (!String(d.get("name")).trim()) er.push("Full name is required.");
     if (!/^\S+@\S+\.\S+$/.test(String(d.get("email")))) er.push("Enter a valid email.");
-    if (!/^\+\d{1,3}\s?\d{6,14}$/.test(String(d.get("phone")))) er.push("Enter phone with country code, e.g. +91 9876543210.");
+    if (!/^\+?\d[\d\s-]{6,14}$/.test(String(d.get("phone")).trim())) er.push("Enter a valid phone number, e.g. +91 9876543210.");
     if (!String(d.get("org")).trim()) er.push("Institution or company is required.");
     if (!d.get("consent")) er.push("Please accept the privacy policy.");
     setErrs(er);
-    if (!er.length) setState("error");
+    if (er.length) return;
+    setState("sending");
+    const res = await submitApplication({
+      form_type: "aics-registration",
+      program: "AI Career Summit",
+      name: String(d.get("name")).trim(),
+      email: String(d.get("email")).trim(),
+      phone: String(d.get("phone")).trim(),
+      college: String(d.get("org")).trim(),
+      role: String(d.get("role") ?? ""),
+      source_page: "/aics",
+      extra: {
+        interest: String(d.get("interest") ?? ""),
+        accessibility: String(d.get("access") ?? ""),
+      },
+    });
+    if (res.ok) {
+      setState("done");
+      form.reset();
+    } else {
+      setState("error");
+      setErrs([
+        res.offline
+          ? `Registration server is not connected yet — your details were not saved. Please email us at ${summit.contactEmail}.`
+          : (res.error ?? "Could not submit. Please try again."),
+      ]);
+    }
   };
   return (
     <Section id="register">
@@ -345,24 +373,33 @@ export function Register() {
           <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-primary/40 blur-[120px]" />
           <div className="relative grid gap-12 lg:grid-cols-2">
             <div>
-              <span className="rounded-full border border-border px-3 py-1 text-xs tracking-widest text-muted-foreground">DEMO FORM</span>
+              <span className="rounded-full border border-border px-3 py-1 text-xs tracking-widest text-muted-foreground">LIMITED SEATS</span>
               <h2 className="mt-6 font-aics-display text-3xl font-bold uppercase leading-none sm:text-4xl md:text-5xl">Your next opportunity <span className="aics-text-gradient">starts here.</span></h2>
               <p className="mt-6 text-muted-foreground">Take the next step toward understanding AI, discovering new career pathways, and connecting with the people building the future.</p>
-              <p className="mt-6 text-sm text-muted-foreground">Online registration isn't connected yet. Contact: {summit.contactEmail}</p>
+              <p className="mt-6 text-sm text-muted-foreground">Questions? Contact: {summit.contactEmail}</p>
             </div>
+            {state === "done" ? (
+              <div className="grid place-items-center rounded-2xl border border-primary-glow/40 bg-background/40 p-8 text-center">
+                <div>
+                  <p className="font-aics-display text-2xl font-bold text-primary-glow">Registration received!</p>
+                  <p className="mt-3 text-sm text-muted-foreground">Thanks — your seat request is saved. Our team will confirm by email or phone shortly.</p>
+                  <button onClick={() => setState("idle")} className="mt-6 rounded-full border border-border px-6 py-2.5 text-sm transition hover:border-foreground">Register another person</button>
+                </div>
+              </div>
+            ) : (
             <form onSubmit={submit} className="grid gap-4" noValidate>
               <input name="name" placeholder="Full name *" className={`${field} text-base sm:text-sm`} />
               <input name="email" type="email" placeholder="Email address *" className={`${field} text-base sm:text-sm`} />
-              <input name="phone" placeholder="Mobile with country code *" className={`${field} text-base sm:text-sm`} />
+              <input name="phone" placeholder="Mobile number *" className={`${field} text-base sm:text-sm`} />
               <input name="org" placeholder="College, institution or company *" className={`${field} text-base sm:text-sm`} />
               <select name="role" className={`${field} text-base sm:text-sm`} defaultValue="Student">{["Student", "Working Professional", "Educator", "Entrepreneur", "Other"].map((r) => <option key={r}>{r}</option>)}</select>
               <select name="interest" className={`${field} text-base sm:text-sm`}>{tracks.map((t) => <option key={t.t}>{t.t}</option>)}</select>
               <textarea name="access" placeholder="Accessibility or participation requirements (optional)" className={`${field} text-base sm:text-sm`} rows={2} />
               <label className="flex gap-3 text-sm text-muted-foreground"><input type="checkbox" name="consent" /> I agree to the privacy policy and event communications.</label>
               {errs.length > 0 && <ul className="text-sm text-destructive">{errs.map((e) => <li key={e}>{e}</li>)}</ul>}
-              {state === "error" && !errs.length && <p className="text-sm text-primary-glow">Registration is not open online yet — your details were not saved. Please check back soon.</p>}
-              <button className="rounded-full bg-foreground px-8 py-4 font-medium text-background transition hover:scale-[1.02]">SECURE MY SPOT</button>
+              <button disabled={state === "sending"} className="rounded-full bg-foreground px-8 py-4 font-medium text-background transition hover:scale-[1.02] disabled:opacity-60">{state === "sending" ? "SUBMITTING…" : "SECURE MY SPOT"}</button>
             </form>
+            )}
           </div>
         </div>
       </Reveal>

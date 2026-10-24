@@ -18,8 +18,8 @@ return [
     // Add your live site + preview domains. '*' disables the whitelist (not recommended).
     'allowed_origins' => [
         'http://localhost:8080',
-        'https://your-site.lovable.app',
-        'https://www.your-domain.com',
+        'https://skillaiindia.com',
+        'https://www.skillaiindia.com',
     ],
 
     // --- Admin ---

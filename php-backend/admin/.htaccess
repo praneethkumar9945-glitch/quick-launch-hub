@@ -1,0 +1,3 @@
+# Serve the admin panel when visiting /api/admin/ directly.
+DirectoryIndex index.php
+Options -Indexes
