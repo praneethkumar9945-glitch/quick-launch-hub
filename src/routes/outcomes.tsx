@@ -7,8 +7,12 @@ import { ApplyModal } from "./ug-programs";
 export const Route = createFileRoute("/outcomes")({
   head: () => ({
     meta: [
-      { title: "Outcomes — Skill Ai School of Business" },
+      { title: "Outcomes — Skill Ai School of AI" },
       { name: "description", content: "Placements, founder roles and salaries achieved by Skill Ai graduates." },
+      { property: "og:title", content: "Outcomes — Skill Ai School of AI" },
+      { property: "og:description", content: "Placements, founder roles and salaries achieved by Skill Ai graduates." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Outcomes,

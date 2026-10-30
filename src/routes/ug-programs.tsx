@@ -8,8 +8,12 @@ import { ArrowRight, GraduationCap, Briefcase, Calculator, BookOpen, Sparkles, C
 export const Route = createFileRoute("/ug-programs")({
   head: () => ({
     meta: [
-      { title: "UG / PG Programs — Skill Ai School of Business" },
+      { title: "UG / PG Programs — Skill Ai School of AI" },
       { name: "description", content: "Undergraduate (BCA, BBA, BCom, BA) and Postgraduate (MBA, MCA, MCom, MA) programs at Skill Ai — built for the AI era." },
+      { property: "og:title", content: "UG / PG Programs — Skill Ai School of AI" },
+      { property: "og:description", content: "Undergraduate and postgraduate programs at Skill Ai — built for the AI era." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: UGPrograms,
