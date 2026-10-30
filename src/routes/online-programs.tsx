@@ -7,8 +7,12 @@ import { ApplyModal } from "./ug-programs";
 export const Route = createFileRoute("/online-programs")({
   head: () => ({
     meta: [
-      { title: "Online Programs — Skill Ai School of Business" },
+      { title: "Online Programs — Skill Ai School of AI" },
       { name: "description", content: "Live online cohorts in AI, growth, product and entrepreneurship — taught by founders." },
+      { property: "og:title", content: "Online Programs — Skill Ai School of AI" },
+      { property: "og:description", content: "Live online cohorts in AI, growth, product and entrepreneurship — taught by founders." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: OnlinePrograms,
