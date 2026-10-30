@@ -14,10 +14,10 @@ import demodayImg from "@/assets/demoday.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "SKILL AI School of AI — AI Training & Career Programs" },
-      { name: "description", content: "PGP in Startup Leadership & Entrepreneurship at SKILL AI. 12 months, full-time, Bangalore." },
-      { property: "og:title", content: "SKILL AI School of AI" },
-      { property: "og:description", content: "AI training and career-focused programs at SKILL AI School of AI." },
+      { title: "Skill Ai school of Ai — build real Ai projects" },
+      { name: "description", content: "Skill Ai school of Ai — build real Ai projects." },
+      { property: "og:title", content: "Skill Ai school of Ai — build real Ai projects" },
+      { property: "og:description", content: "Skill Ai school of Ai — build real Ai projects." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
