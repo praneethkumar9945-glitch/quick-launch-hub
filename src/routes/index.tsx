@@ -232,25 +232,19 @@ function Index() {
         </div>
       </section>
 
-      {/* Supporters — demo sliding cards */}
+      {/* Supporters — sliding photo cards */}
       <section className="border-y border-border bg-surface/40 py-10 overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="reveal text-xs sm:text-sm font-medium uppercase tracking-widest text-mint">Our Supporters</div>
-          <p className="reveal mt-2 text-sm text-muted-foreground">Demo placeholders — real partner names and logos go here.</p>
         </div>
         <div className="marquee-pause mt-8 overflow-hidden">
-          <div className="marquee-track flex w-max gap-4 pr-4">
+          <div className="marquee-track flex w-max gap-5 pr-5">
             {[...supporters, ...supporters].map((s, i) => (
               <div
                 key={`${s.name}-${i}`}
-                className="w-80 sm:w-96 shrink-0 rounded-3xl border border-border bg-background p-7 hover:border-lime/50 transition-colors"
+                className="w-72 sm:w-80 shrink-0 overflow-hidden rounded-3xl border border-border bg-background hover:border-lime/50 transition-colors"
               >
-                <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-lime/10 p-3">
-                  <img src={s.img} alt={`${s.name} logo`} loading="lazy" width={80} height={80} className="h-full w-full object-contain" />
-                </div>
-                <div className="mt-5 text-xl font-bold">{s.name}</div>
-                <div className="mt-1.5 text-sm uppercase tracking-wider text-mint">{s.tag}</div>
-                <p className="mt-4 text-base text-muted-foreground">{s.blurb}</p>
+                <img src={s.img.url} alt={s.name} loading="lazy" className="h-auto w-full object-cover" />
               </div>
             ))}
           </div>
