@@ -10,12 +10,12 @@ import pillar2 from "@/assets/pillar-2.jpg";
 import pillar3 from "@/assets/pillar-3.jpg";
 import pillar4 from "@/assets/pillar-4.jpg";
 import demodayImg from "@/assets/demoday.jpg";
-import supporter1 from "@/assets/supporters/supporter-1.png";
-import supporter2 from "@/assets/supporters/supporter-2.png";
-import supporter3 from "@/assets/supporters/supporter-3.png";
-import supporter4 from "@/assets/supporters/supporter-4.png";
-import supporter5 from "@/assets/supporters/supporter-5.png";
-import supporter6 from "@/assets/supporters/supporter-6.png";
+import supporter1 from "@/assets/supporters/supporter-shane.jpg.asset.json";
+import supporter2 from "@/assets/supporters/supporter-siddhi.jpg.asset.json";
+import supporter3 from "@/assets/supporters/supporter-khader.jpg.asset.json";
+import supporter4 from "@/assets/supporters/supporter-wadiyar.jpg.asset.json";
+import supporter5 from "@/assets/supporters/supporter-praveen.png.asset.json";
+import supporter6 from "@/assets/supporters/supporter-rithuparna.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -51,12 +51,12 @@ const stats = [
 ];
 
 const supporters = [
-  { name: "Supporter One", tag: "Technology Partner", img: supporter1, blurb: "Demo card — replace with a real supporter name, logo and short note." },
-  { name: "Supporter Two", tag: "Hiring Partner", img: supporter2, blurb: "Demo card — replace with a real supporter name, logo and short note." },
-  { name: "Supporter Three", tag: "Industry Mentor", img: supporter3, blurb: "Demo card — replace with a real supporter name, logo and short note." },
-  { name: "Supporter Four", tag: "Community Partner", img: supporter4, blurb: "Demo card — replace with a real supporter name, logo and short note." },
-  { name: "Supporter Five", tag: "Training Partner", img: supporter5, blurb: "Demo card — replace with a real supporter name, logo and short note." },
-  { name: "Supporter Six", tag: "Ecosystem Partner", img: supporter6, blurb: "Demo card — replace with a real supporter name, logo and short note." },
+  { name: "Shane Hurlbut", img: supporter1 },
+  { name: "Siddhi Mahajankatti", img: supporter2 },
+  { name: "U T Khader", img: supporter3 },
+  { name: "YKC Wadiyar", img: supporter4 },
+  { name: "Praveen", img: supporter5 },
+  { name: "Rithuparna K S", img: supporter6 },
 ];
 
 const pillars = [
