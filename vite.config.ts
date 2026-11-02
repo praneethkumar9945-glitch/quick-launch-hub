@@ -15,10 +15,10 @@ export default defineConfig({
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
-    ...(isStatic
-      ? {
-          spa: { enabled: true },
-        }
-      : {}),
+    // The site uses hash-based routing (#/aics) for static hosting. The hash is
+    // never sent to the server, so SSR always renders "/" while the client may
+    // render another route — a guaranteed hydration mismatch. Render
+    // client-only (SPA mode) everywhere so server and client always agree.
+    spa: { enabled: true },
   },
 });
