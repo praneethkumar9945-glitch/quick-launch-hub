@@ -44,6 +44,15 @@ const stats = [
   { value: "10000+", label: "Case studies" },
 ];
 
+const supporters = [
+  { name: "Supporter One", tag: "Technology Partner", blurb: "Demo card — replace with a real supporter name, role and short note." },
+  { name: "Supporter Two", tag: "Hiring Partner", blurb: "Demo card — replace with a real supporter name, role and short note." },
+  { name: "Supporter Three", tag: "Industry Mentor", blurb: "Demo card — replace with a real supporter name, role and short note." },
+  { name: "Supporter Four", tag: "Community Partner", blurb: "Demo card — replace with a real supporter name, role and short note." },
+  { name: "Supporter Five", tag: "Training Partner", blurb: "Demo card — replace with a real supporter name, role and short note." },
+  { name: "Supporter Six", tag: "Ecosystem Partner", blurb: "Demo card — replace with a real supporter name, role and short note." },
+];
+
 const pillars = [
   
   { n: "2", title: "AI courses", img: pillar2, href: "/ai", body: "Explore industry-ready AI, DS, Big Data, Advanced MLOps, Gen Ai, Agentic Ai, Cyber security courses with live projects and placement support." },
@@ -213,6 +222,31 @@ function Index() {
           <div className="flex flex-col items-center gap-1 text-muted-foreground animate-scroll-blink">
             <span className="text-xs tracking-widest">SCROLL</span>
             <ChevronDown className="h-4 w-4" />
+          </div>
+        </div>
+      </section>
+
+      {/* Supporters — demo sliding cards */}
+      <section className="border-y border-border bg-surface/40 py-10 overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="reveal text-xs sm:text-sm font-medium uppercase tracking-widest text-mint">Our Supporters</div>
+          <p className="reveal mt-2 text-sm text-muted-foreground">Demo placeholders — real partner names and logos go here.</p>
+        </div>
+        <div className="marquee-pause mt-8 overflow-hidden">
+          <div className="marquee-track flex w-max gap-4 pr-4">
+            {[...supporters, ...supporters].map((s, i) => (
+              <div
+                key={`${s.name}-${i}`}
+                className="w-64 shrink-0 rounded-2xl border border-border bg-background p-5 hover:border-lime/50 transition-colors"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-lime/10 text-sm font-bold text-lime">
+                  {s.name.charAt(0)}
+                </div>
+                <div className="mt-4 text-base font-bold">{s.name}</div>
+                <div className="mt-1 text-xs uppercase tracking-wider text-mint">{s.tag}</div>
+                <p className="mt-3 text-sm text-muted-foreground">{s.blurb}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
