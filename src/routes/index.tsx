@@ -10,6 +10,12 @@ import pillar2 from "@/assets/pillar-2.jpg";
 import pillar3 from "@/assets/pillar-3.jpg";
 import pillar4 from "@/assets/pillar-4.jpg";
 import demodayImg from "@/assets/demoday.jpg";
+import supporter1 from "@/assets/supporters/supporter-1.png";
+import supporter2 from "@/assets/supporters/supporter-2.png";
+import supporter3 from "@/assets/supporters/supporter-3.png";
+import supporter4 from "@/assets/supporters/supporter-4.png";
+import supporter5 from "@/assets/supporters/supporter-5.png";
+import supporter6 from "@/assets/supporters/supporter-6.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,12 +51,12 @@ const stats = [
 ];
 
 const supporters = [
-  { name: "Supporter One", tag: "Technology Partner", blurb: "Demo card — replace with a real supporter name, role and short note." },
-  { name: "Supporter Two", tag: "Hiring Partner", blurb: "Demo card — replace with a real supporter name, role and short note." },
-  { name: "Supporter Three", tag: "Industry Mentor", blurb: "Demo card — replace with a real supporter name, role and short note." },
-  { name: "Supporter Four", tag: "Community Partner", blurb: "Demo card — replace with a real supporter name, role and short note." },
-  { name: "Supporter Five", tag: "Training Partner", blurb: "Demo card — replace with a real supporter name, role and short note." },
-  { name: "Supporter Six", tag: "Ecosystem Partner", blurb: "Demo card — replace with a real supporter name, role and short note." },
+  { name: "Supporter One", tag: "Technology Partner", img: supporter1, blurb: "Demo card — replace with a real supporter name, logo and short note." },
+  { name: "Supporter Two", tag: "Hiring Partner", img: supporter2, blurb: "Demo card — replace with a real supporter name, logo and short note." },
+  { name: "Supporter Three", tag: "Industry Mentor", img: supporter3, blurb: "Demo card — replace with a real supporter name, logo and short note." },
+  { name: "Supporter Four", tag: "Community Partner", img: supporter4, blurb: "Demo card — replace with a real supporter name, logo and short note." },
+  { name: "Supporter Five", tag: "Training Partner", img: supporter5, blurb: "Demo card — replace with a real supporter name, logo and short note." },
+  { name: "Supporter Six", tag: "Ecosystem Partner", img: supporter6, blurb: "Demo card — replace with a real supporter name, logo and short note." },
 ];
 
 const pillars = [
@@ -237,14 +243,14 @@ function Index() {
             {[...supporters, ...supporters].map((s, i) => (
               <div
                 key={`${s.name}-${i}`}
-                className="w-64 shrink-0 rounded-2xl border border-border bg-background p-5 hover:border-lime/50 transition-colors"
+                className="w-80 sm:w-96 shrink-0 rounded-3xl border border-border bg-background p-7 hover:border-lime/50 transition-colors"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-lime/10 text-sm font-bold text-lime">
-                  {s.name.charAt(0)}
+                <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-lime/10 p-3">
+                  <img src={s.img} alt={`${s.name} logo`} loading="lazy" width={80} height={80} className="h-full w-full object-contain" />
                 </div>
-                <div className="mt-4 text-base font-bold">{s.name}</div>
-                <div className="mt-1 text-xs uppercase tracking-wider text-mint">{s.tag}</div>
-                <p className="mt-3 text-sm text-muted-foreground">{s.blurb}</p>
+                <div className="mt-5 text-xl font-bold">{s.name}</div>
+                <div className="mt-1.5 text-sm uppercase tracking-wider text-mint">{s.tag}</div>
+                <p className="mt-4 text-base text-muted-foreground">{s.blurb}</p>
               </div>
             ))}
           </div>
