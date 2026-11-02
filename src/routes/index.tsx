@@ -243,14 +243,14 @@ function Index() {
             {[...supporters, ...supporters].map((s, i) => (
               <div
                 key={`${s.name}-${i}`}
-                className="w-64 shrink-0 rounded-2xl border border-border bg-background p-5 hover:border-lime/50 transition-colors"
+                className="w-80 sm:w-96 shrink-0 rounded-3xl border border-border bg-background p-7 hover:border-lime/50 transition-colors"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-lime/10 text-sm font-bold text-lime">
-                  {s.name.charAt(0)}
+                <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-lime/10 p-3">
+                  <img src={s.img} alt={`${s.name} logo`} loading="lazy" width={80} height={80} className="h-full w-full object-contain" />
                 </div>
-                <div className="mt-4 text-base font-bold">{s.name}</div>
-                <div className="mt-1 text-xs uppercase tracking-wider text-mint">{s.tag}</div>
-                <p className="mt-3 text-sm text-muted-foreground">{s.blurb}</p>
+                <div className="mt-5 text-xl font-bold">{s.name}</div>
+                <div className="mt-1.5 text-sm uppercase tracking-wider text-mint">{s.tag}</div>
+                <p className="mt-4 text-base text-muted-foreground">{s.blurb}</p>
               </div>
             ))}
           </div>
