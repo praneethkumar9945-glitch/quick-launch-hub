@@ -44,6 +44,15 @@ const stats = [
   { value: "10000+", label: "Case studies" },
 ];
 
+const supporters = [
+  { name: "Supporter One", tag: "Technology Partner", blurb: "Demo card — replace with a real supporter name, role and short note." },
+  { name: "Supporter Two", tag: "Hiring Partner", blurb: "Demo card — replace with a real supporter name, role and short note." },
+  { name: "Supporter Three", tag: "Industry Mentor", blurb: "Demo card — replace with a real supporter name, role and short note." },
+  { name: "Supporter Four", tag: "Community Partner", blurb: "Demo card — replace with a real supporter name, role and short note." },
+  { name: "Supporter Five", tag: "Training Partner", blurb: "Demo card — replace with a real supporter name, role and short note." },
+  { name: "Supporter Six", tag: "Ecosystem Partner", blurb: "Demo card — replace with a real supporter name, role and short note." },
+];
+
 const pillars = [
   
   { n: "2", title: "AI courses", img: pillar2, href: "/ai", body: "Explore industry-ready AI, DS, Big Data, Advanced MLOps, Gen Ai, Agentic Ai, Cyber security courses with live projects and placement support." },
