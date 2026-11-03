@@ -242,7 +242,7 @@ function Index() {
             {[...supporters, ...supporters].map((s, i) => (
               <div
                 key={`${s.name}-${i}`}
-                className="w-72 sm:w-80 shrink-0 overflow-hidden rounded-3xl border border-border bg-background hover:border-lime/50 transition-colors"
+                className="w-44 sm:w-80 shrink-0 overflow-hidden rounded-2xl sm:rounded-3xl border border-border bg-background hover:border-lime/50 transition-colors"
               >
                 <img src={s.img.url} alt={s.name} loading="lazy" className="h-auto w-full object-cover" />
               </div>
