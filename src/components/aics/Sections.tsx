@@ -191,18 +191,13 @@ export function Tracks() {
 
 export function Speakers() {
   const [sel, setSel] = useState<string | null>(null);
-  const faces: Record<string, string> = {
-    "Keynote Speaker": keynoteImg,
-    "AI Researcher": researcherImg,
-    "Industry Professional": industryImg,
-    "Startup Founder": founderImg,
-    "Technology Leader": leaderImg,
-    "Career Mentor": mentorImg,
-  };
   const cards = [...speakerTypes, ...speakerTypes];
   const Card = ({ type }: { type: string }) => (
     <button onClick={() => setSel(type)} className="group relative block aspect-[4/5] w-[min(78vw,18rem)] shrink-0 snap-start overflow-hidden rounded-3xl border border-border text-left sm:w-64 md:w-72">
-      <img src={faces[type] ?? keynoteImg} alt={type} loading="lazy" width={768} height={960} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-glow/20 via-card to-background" />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className="font-aics-display text-6xl font-bold text-primary-glow/40 transition duration-700 group-hover:scale-110">{type.split(" ").map((w) => w[0]).join("")}</span>
+      </div>
       <div className="absolute inset-0 scanlines opacity-40" />
       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/60 to-transparent p-6 pt-16">
         <span className="mb-3 block h-px w-12 bg-primary-glow transition-all duration-500 group-hover:w-24" />
