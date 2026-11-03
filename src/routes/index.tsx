@@ -16,6 +16,7 @@ import supporter3 from "@/assets/supporters/supporter-khader.jpg.asset.json";
 import supporter4 from "@/assets/supporters/supporter-wadiyar.jpg.asset.json";
 import supporter5 from "@/assets/supporters/supporter-praveen.png.asset.json";
 import supporter6 from "@/assets/supporters/supporter-rithuparna.jpg.asset.json";
+import supporter7 from "@/assets/supporters/supporter-pratheeksha.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -57,6 +58,7 @@ const supporters = [
   { name: "YKC Wadiyar", img: supporter4 },
   { name: "Praveen", img: supporter5 },
   { name: "Rithuparna K S", img: supporter6 },
+  { name: "Pratheeksha Shetty", img: supporter7 },
 ];
 
 const pillars = [
