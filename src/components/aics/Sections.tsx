@@ -4,34 +4,6 @@ import { Menu, X, Mic, Users, Cpu, Wrench, Network, Compass, Plus, ArrowLeft } f
 import { Link } from "@tanstack/react-router";
 import { summit, tracks, agenda, speakerTypes, faqs } from "@/config/aics-summit";
 import { submitApplication } from "@/lib/php-api";
-import stageAssetUrl from "@/assets/aics/g-stage.jpg";
-const stageAsset = { url: stageAssetUrl };
-import studentsAssetUrl from "@/assets/aics/g-students.jpg";
-const studentsAsset = { url: studentsAssetUrl };
-import networkAssetUrl from "@/assets/aics/g-network.jpg";
-const networkAsset = { url: networkAssetUrl };
-import keynoteAssetUrl from "@/assets/aics/speakers/keynote.jpg";
-const keynoteAsset = { url: keynoteAssetUrl };
-import researcherAssetUrl from "@/assets/aics/speakers/researcher.jpg";
-const researcherAsset = { url: researcherAssetUrl };
-import industryAssetUrl from "@/assets/aics/speakers/industry.jpg";
-const industryAsset = { url: industryAssetUrl };
-import founderAssetUrl from "@/assets/aics/speakers/founder.jpg";
-const founderAsset = { url: founderAssetUrl };
-import leaderAssetUrl from "@/assets/aics/speakers/leader.jpg";
-const leaderAsset = { url: leaderAssetUrl };
-import mentorAssetUrl from "@/assets/aics/speakers/mentor.jpg";
-const mentorAsset = { url: mentorAssetUrl };
-
-const stage = stageAsset.url;
-const students = studentsAsset.url;
-const networkImg = networkAsset.url;
-const keynoteImg = keynoteAsset.url;
-const researcherImg = researcherAsset.url;
-const industryImg = industryAsset.url;
-const founderImg = founderAsset.url;
-const leaderImg = leaderAsset.url;
-const mentorImg = mentorAsset.url;
 
 const links = [
   ["Home", "home"], ["About", "about"], ["Speakers", "speakers"],
@@ -219,18 +191,13 @@ export function Tracks() {
 
 export function Speakers() {
   const [sel, setSel] = useState<string | null>(null);
-  const faces: Record<string, string> = {
-    "Keynote Speaker": keynoteImg,
-    "AI Researcher": researcherImg,
-    "Industry Professional": industryImg,
-    "Startup Founder": founderImg,
-    "Technology Leader": leaderImg,
-    "Career Mentor": mentorImg,
-  };
   const cards = [...speakerTypes, ...speakerTypes];
   const Card = ({ type }: { type: string }) => (
     <button onClick={() => setSel(type)} className="group relative block aspect-[4/5] w-[min(78vw,18rem)] shrink-0 snap-start overflow-hidden rounded-3xl border border-border text-left sm:w-64 md:w-72">
-      <img src={faces[type] ?? keynoteImg} alt={type} loading="lazy" width={768} height={960} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-glow/20 via-card to-background" />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className="font-aics-display text-6xl font-bold text-primary-glow/40 transition duration-700 group-hover:scale-110">{type.split(" ").map((w) => w[0]).join("")}</span>
+      </div>
       <div className="absolute inset-0 scanlines opacity-40" />
       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/60 to-transparent p-6 pt-16">
         <span className="mb-3 block h-px w-12 bg-primary-glow transition-all duration-500 group-hover:w-24" />
@@ -303,24 +270,6 @@ export function Organizer() {
   );
 }
 
-export function Gallery() {
-  return (
-    <Section id="gallery">
-      <Heading kicker="LIVE EXPERIENCE" title={<>Step into <span className="aics-text-gradient">the future.</span></>} />
-      <div className="grid gap-6 md:grid-cols-3 md:grid-rows-2">
-        {[[stage, "md:col-span-2 md:row-span-2", "Keynote stage", 1536, 1024], [students, "", "Hands-on with AI", 1024, 1280], [networkImg, "", "Networking & demos", 1024, 1024]].map(([src, cls, cap, w, h], i) => (
-          <Reveal key={cap as string} delay={i * 0.1} className={cls as string}>
-          <div className="group relative aspect-[4/3] h-full min-h-56 overflow-hidden rounded-3xl md:aspect-auto md:min-h-0">
-              <img src={src as string} alt={cap as string} loading="lazy" width={w as number} height={h as number} className="h-full w-full object-cover transition duration-1000 group-hover:scale-110" />
-              <span className="aics-card-glass absolute bottom-4 left-4 rounded-full px-4 py-2 text-sm">{cap}</span>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-      <p className="mt-6 text-xs text-muted-foreground">Conceptual visuals — real event photos will be added after the summit.</p>
-    </Section>
-  );
-}
 
 const field = "w-full rounded-xl border border-border bg-background/60 px-4 py-3 outline-none transition focus:border-primary-glow";
 
