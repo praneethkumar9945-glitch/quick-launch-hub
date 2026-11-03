@@ -4,34 +4,6 @@ import { Menu, X, Mic, Users, Cpu, Wrench, Network, Compass, Plus, ArrowLeft } f
 import { Link } from "@tanstack/react-router";
 import { summit, tracks, agenda, speakerTypes, faqs } from "@/config/aics-summit";
 import { submitApplication } from "@/lib/php-api";
-import stageAssetUrl from "@/assets/aics/g-stage.jpg";
-const stageAsset = { url: stageAssetUrl };
-import studentsAssetUrl from "@/assets/aics/g-students.jpg";
-const studentsAsset = { url: studentsAssetUrl };
-import networkAssetUrl from "@/assets/aics/g-network.jpg";
-const networkAsset = { url: networkAssetUrl };
-import keynoteAssetUrl from "@/assets/aics/speakers/keynote.jpg";
-const keynoteAsset = { url: keynoteAssetUrl };
-import researcherAssetUrl from "@/assets/aics/speakers/researcher.jpg";
-const researcherAsset = { url: researcherAssetUrl };
-import industryAssetUrl from "@/assets/aics/speakers/industry.jpg";
-const industryAsset = { url: industryAssetUrl };
-import founderAssetUrl from "@/assets/aics/speakers/founder.jpg";
-const founderAsset = { url: founderAssetUrl };
-import leaderAssetUrl from "@/assets/aics/speakers/leader.jpg";
-const leaderAsset = { url: leaderAssetUrl };
-import mentorAssetUrl from "@/assets/aics/speakers/mentor.jpg";
-const mentorAsset = { url: mentorAssetUrl };
-
-const stage = stageAsset.url;
-const students = studentsAsset.url;
-const networkImg = networkAsset.url;
-const keynoteImg = keynoteAsset.url;
-const researcherImg = researcherAsset.url;
-const industryImg = industryAsset.url;
-const founderImg = founderAsset.url;
-const leaderImg = leaderAsset.url;
-const mentorImg = mentorAsset.url;
 
 const links = [
   ["Home", "home"], ["About", "about"], ["Speakers", "speakers"],
