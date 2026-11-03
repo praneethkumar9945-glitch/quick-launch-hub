@@ -28,8 +28,6 @@ function AicsPage() {
       <Nav />
       <Hero />
       <div className="aics-neon bg-background">
-        <Speakers />
-        <InfoStrip />
         <About />
         <WhyAttend />
         <Register />

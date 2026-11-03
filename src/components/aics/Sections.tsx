@@ -6,7 +6,7 @@ import { summit, tracks, agenda, faqs } from "@/config/aics-summit";
 import { submitApplication } from "@/lib/php-api";
 
 const links = [
-  ["Home", "home"], ["About", "about"], ["Speakers", "speakers"],
+  ["Home", "home"], ["About", "about"],
 ] as const;
 
 const siteLinks = [
@@ -88,36 +88,6 @@ export function Nav() {
   );
 }
 
-function useCountdown(target: string | null) {
-  const [now, setNow] = useState(() => Date.now());
-  useEffect(() => { if (!target) return; const t = setInterval(() => setNow(Date.now()), 1000); return () => clearInterval(t); }, [target]);
-  if (!target) return null;
-  const d = Math.max(0, new Date(target).getTime() - now);
-  return [Math.floor(d / 864e5), Math.floor(d / 36e5) % 24, Math.floor(d / 6e4) % 60, Math.floor(d / 1e3) % 60];
-}
-
-export function InfoStrip() {
-  const cd = useCountdown(summit.date);
-  const items = [["Date", summit.dateLabel], ["Venue", summit.venue], ["City", summit.city], ["Format", summit.format], ["Registration", summit.registrationStatus]];
-  return (
-    <section id="info" className="relative border-y border-border bg-card/40 px-6 py-10 backdrop-blur">
-      <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-6">
-        {items.map(([k, v], i) => (
-          <Reveal key={k} delay={i * 0.06}><p className="text-xs tracking-widest text-muted-foreground uppercase">{k}</p><p className="mt-1 break-words font-aics-display font-semibold">{v}</p></Reveal>
-        ))}
-        <Reveal delay={0.3}>
-          <p className="text-xs tracking-widest text-muted-foreground uppercase">Countdown</p>
-          {cd ? (
-            <div className="mt-1 flex gap-3 font-aics-display font-bold text-primary-glow">
-              {cd.map((n, i) => <span key={i}>{String(n).padStart(2, "0")}<span className="text-xs text-muted-foreground">{"dhms"[i]}</span></span>)}
-            </div>
-          ) : <p className="mt-1 font-aics-display font-semibold">Starts once date is set</p>}
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
 export function About() {
   const cards = [["01", "DISCOVER", "Understand AI technologies, industry trends, and emerging career opportunities."], ["02", "CONNECT", "Meet professionals, educators, founders, recruiters, and fellow innovators."], ["03", "BUILD", "Explore practical skills, career pathways, projects, and next steps for entering the AI ecosystem."]];
   return (
@@ -185,50 +155,6 @@ export function Tracks() {
         ))}
       </div>
       <p className="mt-8 text-xs text-muted-foreground">Attending the summit does not guarantee job placement.</p>
-    </Section>
-  );
-}
-
-export function Speakers() {
-  const [sel, setSel] = useState<string | null>(null);
-  const cards = [...speakerTypes, ...speakerTypes];
-  const Card = ({ type }: { type: string }) => (
-    <button onClick={() => setSel(type)} className="group relative block aspect-[4/5] w-[min(78vw,18rem)] shrink-0 snap-start overflow-hidden rounded-3xl border border-border text-left sm:w-64 md:w-72">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-glow/20 via-card to-background" />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="font-aics-display text-6xl font-bold text-primary-glow/40 transition duration-700 group-hover:scale-110">{type.split(" ").map((w) => w[0]).join("")}</span>
-      </div>
-      <div className="absolute inset-0 scanlines opacity-40" />
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/60 to-transparent p-6 pt-16">
-        <span className="mb-3 block h-px w-12 bg-primary-glow transition-all duration-500 group-hover:w-24" />
-        <p className="text-xs tracking-widest text-primary-glow uppercase">{type}</p>
-        <p className="mt-1 font-aics-display text-xl font-bold">Speaker Announcement Coming Soon</p>
-      </div>
-    </button>
-  );
-  return (
-    <Section id="speakers" className="bg-card/20">
-      <Heading kicker="SPEAKERS & EXPERTS" title={<>Meet the minds <span className="aics-text-gradient">shaping tomorrow.</span></>} />
-      <Reveal>
-        <div className="relative overflow-hidden py-2 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)] max-sm:overflow-x-auto max-sm:overscroll-x-contain max-sm:[mask-image:none]">
-          <div className="flex w-max snap-x snap-mandatory gap-4 animate-marquee hover:[animation-play-state:paused] max-sm:animate-none sm:gap-6">
-            {cards.map((type, i) => <Card key={`${type}-${i}`} type={type} />)}
-          </div>
-        </div>
-      </Reveal>
-      <p className="mt-6 text-center text-xs text-muted-foreground">Announcing soon — swipe to view each speaker.</p>
-      <AnimatePresence>
-        {sel && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSel(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 p-6 backdrop-blur">
-            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} onClick={(e) => e.stopPropagation()} className="aics-card-glass max-w-md rounded-3xl p-8">
-              <p className="text-xs tracking-widest text-primary-glow uppercase">{sel}</p>
-              <h3 className="mt-2 font-aics-display text-2xl font-bold">Speaker Announcement Coming Soon</h3>
-              <p className="mt-4 text-muted-foreground">Biography, session title and schedule will appear here once the speaker is confirmed.</p>
-              <button onClick={() => setSel(null)} className="mt-6 rounded-full bg-foreground px-6 py-2 text-sm text-background">Close</button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </Section>
   );
 }
