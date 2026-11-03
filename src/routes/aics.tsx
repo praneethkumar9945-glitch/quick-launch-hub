@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Hero } from "@/components/aics/Hero";
-import { Nav, InfoStrip, About, WhyAttend, Speakers, Register, Footer } from "@/components/aics/Sections";
+import { Nav, About, WhyAttend, Register, Footer } from "@/components/aics/Sections";
 
 export const Route = createFileRoute("/aics")({
   head: () => ({

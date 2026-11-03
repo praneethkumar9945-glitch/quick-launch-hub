@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState, type ReactNode, type FormEvent } from "react";
 import { Menu, X, Mic, Users, Cpu, Wrench, Network, Compass, Plus, ArrowLeft } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { summit, tracks, agenda, speakerTypes, faqs } from "@/config/aics-summit";
+import { summit, tracks, agenda, faqs } from "@/config/aics-summit";
 import { submitApplication } from "@/lib/php-api";
 
 const links = [
