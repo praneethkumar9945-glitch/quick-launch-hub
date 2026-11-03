@@ -270,24 +270,6 @@ export function Organizer() {
   );
 }
 
-export function Gallery() {
-  return (
-    <Section id="gallery">
-      <Heading kicker="LIVE EXPERIENCE" title={<>Step into <span className="aics-text-gradient">the future.</span></>} />
-      <div className="grid gap-6 md:grid-cols-3 md:grid-rows-2">
-        {[[stage, "md:col-span-2 md:row-span-2", "Keynote stage", 1536, 1024], [students, "", "Hands-on with AI", 1024, 1280], [networkImg, "", "Networking & demos", 1024, 1024]].map(([src, cls, cap, w, h], i) => (
-          <Reveal key={cap as string} delay={i * 0.1} className={cls as string}>
-          <div className="group relative aspect-[4/3] h-full min-h-56 overflow-hidden rounded-3xl md:aspect-auto md:min-h-0">
-              <img src={src as string} alt={cap as string} loading="lazy" width={w as number} height={h as number} className="h-full w-full object-cover transition duration-1000 group-hover:scale-110" />
-              <span className="aics-card-glass absolute bottom-4 left-4 rounded-full px-4 py-2 text-sm">{cap}</span>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-      <p className="mt-6 text-xs text-muted-foreground">Conceptual visuals — real event photos will be added after the summit.</p>
-    </Section>
-  );
-}
 
 const field = "w-full rounded-xl border border-border bg-background/60 px-4 py-3 outline-none transition focus:border-primary-glow";
 
