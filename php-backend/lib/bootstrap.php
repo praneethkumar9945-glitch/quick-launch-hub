@@ -60,7 +60,8 @@ function db(array $config): PDO
     }
 
     $d   = $config['db'];
-    $dsn = "mysql:host={$d['host']};dbname={$d['name']};charset={$d['charset']}";
+    $port = (int) ($d['port'] ?? 3306);
+    $dsn = "mysql:host={$d['host']};port={$port};dbname={$d['name']};charset={$d['charset']}";
 
     try {
         $pdo = new PDO($dsn, $d['user'], $d['password'], [
