@@ -235,16 +235,16 @@ function Index() {
       </section>
 
       {/* Supporters — sliding photo cards */}
-      <section className="border-y border-border bg-surface/40 py-10 overflow-hidden">
+      <section className="border-y border-border bg-surface/40 py-6 overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="reveal text-xs sm:text-sm font-medium uppercase tracking-widest text-mint">Our Supporters</div>
+          <div className="reveal text-xs font-medium uppercase tracking-widest text-mint">Our Supporters</div>
         </div>
-        <div className="marquee-pause mt-8 overflow-hidden">
-          <div className="marquee-track flex w-max gap-5 pr-5">
+        <div className="marquee-pause mt-5 overflow-hidden">
+          <div className="marquee-track flex w-max gap-3 pr-3">
             {[...supporters, ...supporters].map((s, i) => (
               <div
                 key={`${s.name}-${i}`}
-                className="w-44 sm:w-80 shrink-0 overflow-hidden rounded-2xl sm:rounded-3xl border border-border bg-background hover:border-lime/50 transition-colors"
+                className="w-36 sm:w-56 md:w-64 shrink-0 overflow-hidden rounded-xl border border-border bg-background hover:border-lime/50 transition-colors"
               >
                 <img src={s.img.url} alt={s.name} loading="lazy" className="h-auto w-full object-cover" />
               </div>
