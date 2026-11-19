@@ -191,7 +191,7 @@ function Index() {
         <div className="pointer-events-none absolute -top-20 -left-20 h-72 w-72 rounded-full bg-lime/10 blur-3xl animate-float" />
         <div className="pointer-events-none absolute top-40 right-0 h-80 w-80 rounded-full bg-mint/10 blur-3xl animate-float-soft" />
 
-        <div className="grid items-center gap-10 lg:gap-12">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
           <div className="reveal max-w-3xl">
             <div className="mb-3 text-xs sm:text-sm font-medium uppercase tracking-widest text-mint whitespace-pre-line">{"\n"}</div>
             <h1 className="text-[2.25rem] sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight">
@@ -222,6 +222,15 @@ function Index() {
               KNOW MORE <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
 
+          </div>
+          <div className="reveal reveal-delay-2 overflow-hidden rounded-xl border border-border bg-surface">
+            <iframe
+              src="https://drive.google.com/file/d/1HL-FYbl4D2XVAA73DYd4vt9d7RxpjkXo/preview"
+              title="Skill AI introduction video"
+              className="block aspect-video w-full"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+            />
           </div>
         </div>
 
