@@ -223,10 +223,19 @@ function Index() {
             </button>
 
           </div>
-          <div className="reveal reveal-delay-2 overflow-hidden rounded-xl border border-border bg-surface">
+          <div className="reveal reveal-delay-2 hidden overflow-hidden rounded-xl border border-border bg-surface lg:block">
             <iframe
               src="https://drive.google.com/file/d/1HL-FYbl4D2XVAA73DYd4vt9d7RxpjkXo/preview"
               title="Skill AI introduction video"
+              className="block aspect-video w-full"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+          <div className="reveal reveal-delay-2 overflow-hidden rounded-xl border border-border bg-surface lg:hidden">
+            <iframe
+              src="https://drive.google.com/file/d/1NOsQui4qzg7hX0oRRcJw2ZK6EZEORfUt/preview"
+              title="Skill AI introduction video for mobile"
               className="block aspect-video w-full"
               allow="autoplay; encrypted-media; picture-in-picture"
               allowFullScreen
